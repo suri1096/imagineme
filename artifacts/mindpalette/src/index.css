@@ -1,0 +1,200 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-card-border: hsl(var(--card-border));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-popover-border: hsl(var(--popover-border));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-primary-border: var(--primary-border);
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-secondary-border: var(--secondary-border);
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-muted-border: var(--muted-border);
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-accent-border: var(--accent-border);
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-destructive-border: var(--destructive-border);
+
+  --font-sans: var(--app-font-sans);
+  --font-serif: var(--app-font-serif);
+  --font-mono: var(--app-font-mono);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 8px);
+  --radius-2xl: calc(var(--radius) + 16px);
+  --radius-full: 9999px;
+}
+
+/* LIGHT MODE — warm cream + book-blue + gold, drawn from logo palette */
+:root {
+  --background: 38 55% 97%;       /* warm parchment cream  #FEFAF3 */
+  --foreground: 218 35% 22%;      /* deep warm navy        #242D45 */
+
+  --border: 38 30% 88%;
+  --input: 38 40% 93%;
+  --ring: 35 80% 58%;             /* golden ring */
+
+  --card: 0 0% 100%;
+  --card-foreground: 218 35% 22%;
+  --card-border: 38 25% 90%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 218 35% 22%;
+  --popover-border: 38 25% 90%;
+
+  --primary: 212 50% 55%;         /* book blue  #5285C4 */
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 212 42% 88%;       /* light sky blue  #C5DCF0 */
+  --secondary-foreground: 212 42% 22%;
+
+  --muted: 38 25% 93%;
+  --muted-foreground: 218 20% 48%;
+
+  --accent: 35 85% 60%;           /* warm amber-gold  #F4A030 */
+  --accent-foreground: 35 70% 18%;
+
+  --destructive: 0 50% 78%;
+  --destructive-foreground: 0 50% 28%;
+
+  --app-font-sans: 'Quicksand', 'Atkinson Hyperlegible', sans-serif;
+  --app-font-serif: Georgia, serif;
+  --app-font-mono: Menlo, monospace;
+
+  --radius: 1.5rem; /* very rounded, friendly */
+
+  --shadow-sm: 0 4px 14px 0 rgba(0,0,0,0.03);
+  --shadow: 0 8px 30px rgba(0,0,0,0.04);
+  --shadow-md: 0 12px 40px rgba(0,0,0,0.05);
+  --shadow-lg: 0 16px 50px rgba(0,0,0,0.06);
+}
+
+.dark {
+  --background: 218 30% 14%;
+  --foreground: 38 30% 94%;
+
+  --border: 218 20% 24%;
+  --input: 218 25% 20%;
+  --ring: 35 65% 50%;
+
+  --card: 218 30% 17%;
+  --card-foreground: 38 30% 94%;
+  --card-border: 218 20% 24%;
+
+  --popover: 218 30% 17%;
+  --popover-foreground: 38 30% 94%;
+  --popover-border: 218 20% 24%;
+
+  --primary: 212 45% 52%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 212 30% 28%;
+  --secondary-foreground: 212 40% 90%;
+
+  --muted: 218 25% 20%;
+  --muted-foreground: 218 20% 68%;
+
+  --accent: 35 55% 42%;
+  --accent-foreground: 35 55% 92%;
+
+  --destructive: 0 40% 40%;
+  --destructive-foreground: 0 50% 90%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground transition-colors duration-500;
+  }
+}
+
+/* Calm controls overrides */
+body.calm-mode {
+  --background: 38 30% 95%;
+  --card: 38 20% 97%;
+  --primary: 212 35% 60%;
+  --secondary: 212 25% 85%;
+  --accent: 35 55% 65%;
+}
+
+/* Hide scrollbars for storybook */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ── Accessibility preferences ── */
+body.reduce-motion *,
+body.reduce-motion *::before,
+body.reduce-motion *::after {
+  animation-duration: 0.001s !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001s !important;
+}
+
+/* Text size */
+body.text-size-small  { font-size: 90%; }
+body.text-size-medium { font-size: 100%; }
+body.text-size-large  { font-size: 115%; }
+body.text-size-xl     { font-size: 130%; }
+
+/* Dyslexia-friendly font (OpenDyslexic via system fallback stack) */
+body.font-dyslexia,
+body.font-dyslexia p,
+body.font-dyslexia label,
+body.font-dyslexia button,
+body.font-dyslexia input,
+body.font-dyslexia textarea {
+  font-family: "OpenDyslexic", "Comic Sans MS", "Verdana", sans-serif !important;
+  letter-spacing: 0.05em;
+  word-spacing: 0.12em;
+  line-height: 1.65;
+}
+
+/* Low-stimulation theme: muted colours */
+body.theme-low-stimulation {
+  filter: saturate(0.55) brightness(1.04);
+}
+
+/* High-contrast theme: sharp edges, no subtle tints */
+body.theme-high-contrast {
+  filter: contrast(1.45) brightness(0.97);
+}
+body.theme-high-contrast * {
+  border-color: currentColor !important;
+}
+
+/* Legacy large-text kept for backward compat */
+body.large-text { font-size: 118%; }
